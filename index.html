@@ -24,7 +24,8 @@
     }
 
     * { box-sizing: border-box; }
-    html, body { height: 100%; }
+    html { min-height: 100%; background: #05070C; }
+body { min-height: 100vh; }
 
     body{
       margin:0;
@@ -82,7 +83,7 @@
       filter: blur(0.4px);
       transform: translate3d(0,0,0);
       animation: matrixDrift 16s linear infinite;
-      mix-blend-mode: screen;
+      mix-blend-mode: normal;
     }
     @keyframes matrixDrift{
       0%   { transform: translateY(-8%); }
