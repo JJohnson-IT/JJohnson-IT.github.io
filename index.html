@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Jonathan | Security Professional</title>
   <meta name="description" content="Jonathan — Security-focused IT professional. Resume, links, and highlights." />
+
   <style>
     :root{
       --bg: #070B12;
@@ -24,6 +25,7 @@
 
     * { box-sizing: border-box; }
     html, body { height: 100%; }
+
     body{
       margin:0;
       color: var(--text);
@@ -34,12 +36,65 @@
         radial-gradient(700px 500px at 60% 85%, rgba(239,68,68,0.10), transparent 60%),
         linear-gradient(180deg, #05070C 0%, #070B12 40%, #05070C 100%);
       overflow-x: hidden;
+      position: relative;
+    }
+
+    /* --- VERY LIGHT "matrix-ish" vibe (barely noticeable) --- */
+    /* 1) faint scanning lines */
+    body::before{
+      content:"";
+      position: fixed;
+      inset: 0;
+      pointer-events:none;
+      background:
+        repeating-linear-gradient(
+          to bottom,
+          rgba(255,255,255,0.015) 0px,
+          rgba(255,255,255,0.015) 1px,
+          transparent 2px,
+          transparent 7px
+        );
+      opacity: 0.25;
+      mix-blend-mode: overlay;
+    }
+    /* 2) subtle green "rain" shimmer (super low opacity) */
+    body::after{
+      content:"";
+      position: fixed;
+      inset: -20%;
+      pointer-events:none;
+      background:
+        linear-gradient(180deg,
+          transparent 0%,
+          rgba(34,197,94,0.06) 25%,
+          transparent 55%,
+          rgba(34,197,94,0.04) 75%,
+          transparent 100%
+        ),
+        repeating-linear-gradient(
+          to right,
+          rgba(34,197,94,0.06) 0px,
+          rgba(34,197,94,0.06) 1px,
+          transparent 24px,
+          transparent 40px
+        );
+      opacity: 0.08; /* <- keep it subtle */
+      filter: blur(0.4px);
+      transform: translate3d(0,0,0);
+      animation: matrixDrift 16s linear infinite;
+      mix-blend-mode: screen;
+    }
+    @keyframes matrixDrift{
+      0%   { transform: translateY(-8%); }
+      100% { transform: translateY(8%); }
     }
 
     .wrap{
       max-width: 980px;
       margin: 0 auto;
       padding: 28px 16px 60px;
+      position: relative;
+      z-index: 1;
     }
 
     /* top bar */
@@ -95,7 +150,65 @@
     }
     .heroInner{
       position:relative;
-      padding: 26px 18px 22px;
+      padding: 22px 18px 18px;
+    }
+
+    /* NEW: split hero in half */
+    .heroSplit{
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 14px;
+      align-items: stretch;
+    }
+    @media (max-width: 860px){
+      .heroSplit{ grid-template-columns: 1fr; }
+    }
+
+    .heroLeft{
+      min-width: 0;
+    }
+
+    .heroRight{
+      min-width: 0;
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(0,0,0,0.18);
+      border-radius: 18px;
+      padding: 12px;
+      display:flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    /* Photo slot */
+    .photoFrame{
+      width: 100%;
+      aspect-ratio: 1 / 1; /* square */
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background:
+        radial-gradient(300px 200px at 35% 20%, rgba(59,130,246,0.10), transparent 60%),
+        radial-gradient(300px 200px at 65% 75%, rgba(34,197,94,0.08), transparent 60%),
+        rgba(255,255,255,0.03);
+      overflow: hidden;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      position: relative;
+    }
+    .photoFrame img{
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display:block;
+      filter: saturate(1.05) contrast(1.05);
+    }
+
+    .photoMeta{
+      margin-top: 10px;
+      color: rgba(255,255,255,0.60);
+      font-size: 12.5px;
+      line-height: 1.35;
+      font-family: var(--mono);
     }
 
     .terminal{
@@ -328,7 +441,6 @@
       </div>
 
       <div class="right">
-        <!-- Replace # with your real links -->
         <a class="btn btnSmall btnGhost" href="mailto:Jonathan1231586113@icloud.com">Email</a>
         <a class="btn btnSmall btnGhost" href="https://www.linkedin.com/in/jonathan-johnson-1b73882b2/" target="_blank" rel="noopener">LinkedIn</a>
       </div>
@@ -336,48 +448,66 @@
 
     <section class="hero">
       <div class="heroInner">
-        <div class="terminal">
-          <span class="termPrompt">jonathan@portfolio</span>
-          <span>:</span>
-          <span style="color:rgba(255,255,255,0.78)">~</span>
-          <span>$</span>
-          <span>whoami</span>
-          <span class="cursor"></span>
-        </div>
+        <div class="heroSplit">
+          <!-- LEFT HALF -->
+          <div class="heroLeft">
+            <div class="terminal">
+              <span class="termPrompt">jonathan@portfolio</span>
+              <span>:</span>
+              <span style="color:rgba(255,255,255,0.78)">~</span>
+              <span>$</span>
+              <span>whoami</span>
+              <span class="cursor"></span>
+            </div>
 
-        <h1>Jonathan Johnson</h1>
-        <p class="sub">
-          Security-minded IT professional focused on protecting users, reducing risk, and building reliable systems.
-          Hands-on with enterprise support, identity verification workflows, and incident response fundamentals.
-        </p>
+            <h1>Jonathan Johnson</h1>
+            <p class="sub">
+              Security-minded IT professional focused on protecting users, reducing risk, and building reliable systems.
+              Hands-on with enterprise support, identity verification workflows, and incident response fundamentals.
+            </p>
 
-        <div class="splitBtns">
-          <a class="btn btnPrimary" href="resume.pdf" download>
-            <!-- download icon -->
-            <svg class="icon" viewBox="0 0 24 24" fill="none">
-              <path d="M12 3v10" stroke="white" stroke-width="2" stroke-linecap="round"/>
-              <path d="M8 11l4 4 4-4" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M5 21h14" stroke="white" stroke-width="2" stroke-linecap="round"/>
-            </svg>
-            Download Resume (PDF)
-          </a>
+            <div class="splitBtns">
+              <a class="btn btnPrimary" href="resume.pdf" download>
+                <svg class="icon" viewBox="0 0 24 24" fill="none">
+                  <path d="M12 3v10" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                  <path d="M8 11l4 4 4-4" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M5 21h14" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+                Download Resume (PDF)
+              </a>
 
-          <a class="btn" href="resume.pdf" target="_blank" rel="noopener">
-            <!-- view icon -->
-            <svg class="icon" viewBox="0 0 24 24" fill="none">
-              <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z" stroke="white" stroke-width="2"/>
-              <path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" stroke="white" stroke-width="2"/>
-            </svg>
-            View Resume
-          </a>
-        </div>
+              <a class="btn" href="resume.pdf" target="_blank" rel="noopener">
+                <svg class="icon" viewBox="0 0 24 24" fill="none">
+                  <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z" stroke="white" stroke-width="2"/>
+                  <path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" stroke="white" stroke-width="2"/>
+                </svg>
+                View Resume
+              </a>
+            </div>
 
-        <div class="pills">
-          <span class="pill">Incident triage</span>
-          <span class="pill">Identity verification</span>
-          <span class="pill">Windows + enterprise support</span>
-          <span class="pill">Network fundamentals</span>
-          <span class="pill">Documentation & SOPs</span>
+            <div class="pills">
+              <span class="pill">Incident triage</span>
+              <span class="pill">Identity verification</span>
+              <span class="pill">Windows + enterprise support</span>
+              <span class="pill">Network fundamentals</span>
+              <span class="pill">Documentation &amp; SOPs</span>
+            </div>
+          </div>
+
+          <!-- RIGHT HALF (PHOTO) -->
+          <aside class="heroRight">
+            <div class="photoFrame">
+              <!-- 1) Upload your headshot to the repo as: photo.jpg
+                   2) Then uncomment the <img> line below and delete the placeholder overlay -->
+
+              <img src="photo.jpg" alt="Jonathan Johnson headshot" />
+              </div>
+            </div>
+
+            <div class="photoMeta">
+              tip: use a clean headshot • neutral background • good lighting
+            </div>
+          </aside>
         </div>
       </div>
     </section>
@@ -393,7 +523,7 @@
         <ul class="list">
           <li class="li">
             <div class="liTop">
-              <div class="liTitle">Account protection & fraud resistance</div>
+              <div class="liTitle">Account protection &amp; fraud resistance</div>
               <div class="liTag">IAM / Service Desk</div>
             </div>
             <p class="liDesc">
@@ -440,9 +570,6 @@
 
       <div class="card">
         <h2>links.and.contact</h2>
-        <p>
-          
-        </p>
 
         <ul class="list">
           <li class="li">
@@ -451,7 +578,9 @@
               <div class="liTag">recruiter-friendly</div>
             </div>
             <p class="liDesc">
-              <a class="mutedLink" href="https://www.linkedin.com/in/jonathan-johnson-1b73882b2/" target="_blank" rel="noopener">https://linkedin.com/in/Jonathan-Johnson</a>
+              <a class="mutedLink" href="https://www.linkedin.com/in/jonathan-johnson-1b73882b2/" target="_blank" rel="noopener">
+                https://linkedin.com/in/Jonathan-Johnson
+              </a>
             </p>
           </li>
 
@@ -461,7 +590,9 @@
               <div class="liTag">projects + scripts</div>
             </div>
             <p class="liDesc">
-              <a class="mutedLink" href="https://github.com/JJohnson-IT" target="_blank" rel="noopener">https://github.com/JJohnson-IT</a>
+              <a class="mutedLink" href="https://github.com/JJohnson-IT" target="_blank" rel="noopener">
+                https://github.com/JJohnson-IT
+              </a>
             </p>
           </li>
 
@@ -482,10 +613,13 @@
         </div>
 
         <p style="margin-top:12px; color: rgba(255,255,255,0.58); font-size: 13px;">
-          Please feel free to reach out tom me vial email at any time and I will get back to you <span style="font-family:var(--mono)">ASAP</span>
+          Please feel free to reach out to me via email at any time and I will get back to you <span style="font-family:var(--mono)">ASAP</span>.
         </p>
       </div>
     </div>
+
+    <div class="footer">
+      Built on GitHub Pages • minimal • fast • HTTPS
     </div>
   </div>
 </body>
